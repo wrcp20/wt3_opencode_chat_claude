@@ -114,6 +114,21 @@ The frontend then sends it as `Authorization: Bearer <token>` on API calls.
 pytest
 ```
 
+## GitHub automation
+
+This repo includes a minimal workflow set under `.github/workflows/`:
+
+- `ci.yml`: runs `pytest` on pushes and pull requests
+- `security.yml`: runs dependency review, `pip-audit`, and CodeQL
+- `release.yml`: runs Release Please on `main`
+- `release-artifacts.yml`: attaches source archives to published GitHub releases
+
+Release automation is configured through:
+
+- `.release-please-config.json`
+- `.release-please-manifest.json`
+- `CHANGELOG.md`
+
 ## Notes
 
 - The browser keeps local message history only for rendering; the real conversation context lives in the persistent Claude CLI process.

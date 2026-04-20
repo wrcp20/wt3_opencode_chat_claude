@@ -1,0 +1,31 @@
+name: Release Artifacts
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  attach-source-archives:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Prepare archives
+        env:
+          TAG_NAME: ${{ github.event.release.tag_name }}
+        run: |
+          git archive --format=zip --output wt3_opencode_chat_claude-${TAG_NAME}.zip ${TAG_NAME}
+          git archive --format=tar.gz --output wt3_opencode_chat_claude-${TAG_NAME}.tar.gz ${TAG_NAME}
+
+      - name: Upload release artifacts
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            wt3_opencode_chat_claude-${{ github.event.release.tag_name }}.zip
+            wt3_opencode_chat_claude-${{ github.event.release.tag_name }}.tar.gz
