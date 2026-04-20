@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Claude OAuth Chat Demo</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Claude CLI Session</p>
+        <h1>Chat local sobre tu OAuth de Claude Code</h1>
+      </div>
+      <div class="topbar-actions">
+        <span id="statusBadge" class="status-badge">conectando...</span>
+        <select id="modelSelect"></select>
+        <button id="resetBtn" class="ghost">Nueva conversacion</button>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="hero panel">
+        <p class="lede">
+          Este frontend no hace login web. El backend reutiliza la sesion local de <code>claude</code>
+          y transmite la respuesta por SSE desde un proceso persistente ya calentado.
+        </p>
+        <p class="lede auth-tip">
+          Si configuras <code>API_TOKEN</code>, guarda el valor en <code>localStorage.claude_api_token</code>
+          desde la consola del navegador para autorizar las llamadas del frontend.
+        </p>
+      </section>
+
+      <section class="panel chat-panel">
+        <div id="messages" class="messages">
+          <div id="emptyState" class="empty-state">
+            Escribe un mensaje para usar la sesion autenticada de Claude Code en esta maquina.
+          </div>
+        </div>
+        <form id="chatForm" class="composer">
+          <textarea
+            id="messageInput"
+            rows="3"
+            placeholder="Escribe tu mensaje..."
+          ></textarea>
+          <div class="composer-actions">
+            <span id="queueBadge" class="mode-badge">queue: 0</span>
+            <button type="submit" class="primary" id="sendBtn">Enviar</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script src="/static/app.js" defer></script>
+  </body>
+  </html>
