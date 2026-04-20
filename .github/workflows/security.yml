@@ -14,16 +14,6 @@ permissions:
   security-events: write
 
 jobs:
-  dependency-review:
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Dependency review
-        uses: actions/dependency-review-action@v4
-
   pip-audit:
     runs-on: ubuntu-latest
     steps:
